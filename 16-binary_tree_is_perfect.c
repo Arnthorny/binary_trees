@@ -1,78 +1,62 @@
 #include "binary_trees.h"
 
-
 /**
- * binary_tree_size - Measure the height of a binary tree.
+ * height - Measure the height of a binary tree.
  *
- * @tree: Pointer to root node of tree to be measured.
- * Return: 0 if tree is NULL else height of tree.
+ * @tree: Pointer to the root node of the tree.
+ *
+ * Return: The height of a binary tree.
  */
-
-size_t binary_tree_size(const binary_tree_t *tree)
+size_t height(const binary_tree_t *tree)
 {
-	size_t count_l = 0, count_r = 0;
+	size_t left, right;
 
 	if (!tree)
 		return (0);
+	left = tree->left ? 1 + height(tree->left) : 0;
+	right = tree->right ? 1 + height(tree->right) : 0;
 
-	count_l = binary_tree_size(tree->left);
-	count_r = binary_tree_size(tree->right);
-	return (count_l + count_r + 1);
+	return (left > right ? left : right);
 }
 
 /**
- * max_val - Return the max value of two given numbers
+ * is_perfect - recursive function to check if a binary tree is perfect.
  *
- * @num_1: First number to be checked.
- * @num_2: Second number to be checked.
- * Return: Larger value.
- */
-
-int max_val(int num_1, int num_2)
-{
-	return (num_1 > num_2 ? num_1 : num_2);
-}
-
-/**
- * binary_tree_height - Measure the height of a binary tree.
+ * @tree: Pointer to the root node of the tree to check.
+ * @currH: The current height of a binary tree.
+ * @actualH: The actual height of a binary tree.
  *
- * @tree: Pointer to root node of tree to be measured.
- * Return: 0 if tree is NULL else height of tree.
+ * Return: 1 if perfect and 0 otherwise.
  */
-
-size_t binary_tree_height(const binary_tree_t *tree)
+int is_perfect(const binary_tree_t *tree, size_t currH, size_t actualH)
 {
-	size_t max_l = 0, max_r = 0;
-
-	if (!tree || (!tree->left && !tree->right))
+	if (!tree)
 		return (0);
 
-	max_l = binary_tree_height(tree->left);
-	max_r = binary_tree_height(tree->right);
-	return (max_val(max_l, max_r) + 1);
+	if (!tree->left && !tree->right)
+		return (currH == actualH);
+
+	if (!tree->left || !tree->right)
+		return (0);
+
+	return (is_perfect(tree->left, currH + 1, actualH) &&
+			is_perfect(tree->right, currH + 1, actualH));
 }
 
 /**
- * binary_tree_is_perfect - Check if a binary tree is perfect.
+ * binary_tree_is_perfect - Checks if a binary tree is perfect.
  *
- * @tree: Pointer to root node of tree to check.
- * Return: 0 if tree is NULL else 1 if tree is perfect otherwise 0.
+ * @tree: Pointer to the root node of the tree to check
  *
- * Description: The total number of nodes in a
- * perfect binary tree with height h is 2^(h+1) - 1.
+ * Return: 1 if tree is perfect and 0 otherwise.
  */
-
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	int actual_nodes = 0, expected_nodes = 0, h = 0;
+	size_t actualH;
 
 	if (!tree)
 		return (0);
 
-	h = binary_tree_height(tree);
-
-	expected_nodes = (1 << (h + 1)) - 1;
-	actual_nodes = binary_tree_size(tree);
-
-	return (expected_nodes == actual_nodes);
+	actualH = height(tree);
+	return (is_perfect(tree, 0, actualH));
 }
