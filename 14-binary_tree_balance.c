@@ -16,7 +16,8 @@ int max_val(int num_1, int num_2)
 
 
 /**
- * binary_tree_bal_helper - Helper to measure the balance factor for a binary tree.
+ * binary_tree_bal_helper - Helper to measure
+ * the balance factor for a binary tree.
  *
  * @tree: Pointer to current node of tree to be measured.
  * @s: Root Node.
