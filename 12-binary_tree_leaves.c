@@ -15,9 +15,7 @@ size_t binary_tree_leaves(const binary_tree_t *tree)
 	if (!tree)
 		return (0);
 
-	leaves = !tree->left && !tree->right && tree->parent ?
-		1 : binary_tree_leaves(tree->left);
-	leaves += !tree->left && !tree->right && tree->parent ?
-		0 : binary_tree_leaves(tree->right);
+	leaves = !tree->left && !tree->right ? 1 : binary_tree_leaves(tree->left);
+	leaves += !tree->left && !tree->right ? 0 : binary_tree_leaves(tree->right);
 	return (leaves);
 }
