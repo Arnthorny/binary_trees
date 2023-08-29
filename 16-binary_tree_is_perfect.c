@@ -38,12 +38,11 @@ int binary_tree_is_perfect_h(const binary_tree_t *tree, const binary_tree_t *s)
 		return (-1);
 	else if (tree != s && (max_l == -1 || max_r == -1))
 		return (-1);
-	else if (t != s && ((t->right && t->left) || (!t->right && !t->left)))
+	else if (t != s)
 		return (max_val(max_l, max_r) + 1);
-	else if (tree == s && (max_l == -1 || max_r == -1))
-		return (0);
 	else
-		return (max_l == max_r);
+		return (max_l != -1 && max_r != -1 && max_l == max_r);
+
 }
 
 /**
