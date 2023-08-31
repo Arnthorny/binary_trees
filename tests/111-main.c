@@ -9,6 +9,7 @@
  */
 int main(void)
 {
+<<<<<<< HEAD
     bst_t *root;
     bst_t *node;
 
@@ -33,4 +34,30 @@ int main(void)
     printf("Node should be nil -> %p\n", (void *)node);
     binary_tree_print(root);
     return (0);
+=======
+	bst_t *root;
+	bst_t *node;
+
+	root = NULL;
+	node = bst_insert(&root, 98);
+	printf("Inserted: %d\n", node->n);
+	node = bst_insert(&root, 402);
+	printf("Inserted: %d\n", node->n);
+	node = bst_insert(&root, 12);
+	printf("Inserted: %d\n", node->n);
+	node = bst_insert(&root, 46);
+	printf("Inserted: %d\n", node->n);
+	node = bst_insert(&root, 128);
+	printf("Inserted: %d\n", node->n);
+	node = bst_insert(&root, 256);
+	printf("Inserted: %d\n", node->n);
+	node = bst_insert(&root, 512);
+	printf("Inserted: %d\n", node->n);
+	node = bst_insert(&root, 1);
+	printf("Inserted: %d\n", node->n);
+	node = bst_insert(&root, 128);
+	printf("Node should be nil -> %p\n", (void *)node);
+	binary_tree_print(root);
+	return (0);
+>>>>>>> 0919637e22f0561e25cbe42c27f745bb0cbc4868
 }
