@@ -1,6 +1,5 @@
 #include "binary_trees.h"
 
-
 /**
  * bst_insert_h - Helper Function to insert node into a BST.
  * @tree: Pointer to root node of tree for insertion.
@@ -12,7 +11,7 @@ void bst_insert_h(bst_t *tree, bst_t **node, int *inserted)
 	if (!tree)
 		return;
 
-	if ((*node)->n > tree->n)
+	if ((*node)->n > tree->n && !*inserted)
 	{
 		bst_insert_h(tree->right, node, inserted);
 		if (*inserted)
@@ -22,7 +21,7 @@ void bst_insert_h(bst_t *tree, bst_t **node, int *inserted)
 		*inserted = 1;
 	}
 
-	else if ((*node)->n < tree->n)
+	else if ((*node)->n < tree->n && !*inserted)
 	{
 		bst_insert_h(tree->left, node, inserted);
 		if (*inserted)
@@ -36,7 +35,6 @@ void bst_insert_h(bst_t *tree, bst_t **node, int *inserted)
 		*inserted = 1;
 		free(*node);
 		*node = NULL;
-		return;
 	}
 }
 
@@ -55,14 +53,9 @@ bst_t *bst_insert(bst_t **tree, int value)
 	if (!tree)
 		return (NULL);
 
-	node = malloc(sizeof(*node));
+	node = binary_tree_node(NULL, value);
 	if (!node)
 		return (NULL);
-
-	node->n = value;
-	node->parent = NULL;
-	node->left = NULL;
-	node->right = NULL;
 
 	if (!(*tree))
 		*tree = node;
