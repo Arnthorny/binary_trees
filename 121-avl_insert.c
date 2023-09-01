@@ -39,19 +39,19 @@ avl_t *avl_recursive_insert(avl_t **tree, avl_t *parent, avl_t **new,
 
 	balance = binary_tree_balance((*tree));
 	if (balance > 1 && value < (*tree)->left->n)
-		return (binary_tree_rotate_right((*tree)));
+		*tree = binary_tree_rotate_right(*tree);
 	if (balance < -1 && value > (*tree)->right->n)
-		return (binary_tree_rotate_left((*tree)));
+		*tree = binary_tree_rotate_left(*tree);
 
 	if (balance > 1 && value > (*tree)->left->n)
 	{
 		(*tree)->left = binary_tree_rotate_left((*tree)->left);
-		return (binary_tree_rotate_right((*tree)));
+		*tree =  binary_tree_rotate_right(*tree);
 	}
 	if (balance < -1 && value < (*tree)->right->n)
 	{
 		(*tree)->right = binary_tree_rotate_right((*tree)->right);
-		return (binary_tree_rotate_left((*tree)));
+		*tree = binary_tree_rotate_left(*tree);
 	}
 	return (*tree);
 }
