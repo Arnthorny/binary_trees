@@ -95,7 +95,7 @@ bst_t *bst_remove(bst_t *root, int value)
 	node_del = arr[0];
 
 	if (!node_del)
-		return (NULL);
+		return (root);
 
 	if ((node_del->left && !node_del->right) ||
 			(node_del->right && !node_del->left))
