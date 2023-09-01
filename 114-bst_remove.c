@@ -56,8 +56,10 @@ void align_nodes(bst_t *node_del, bst_t *node_add)
 				node_add_p->left = NULL;
 		}
 		node_add->parent = node_del_p;
-		node_add->left = node_del->left;
-		node_add->right = node_del->right;
+		if (!node_add->left)
+			node_add->left = node_del->left;
+		if (!node_add->right)
+			node_add->right = node_del->right;
 
 		if (node_del->left)
 			node_del->left->parent = node_add;
